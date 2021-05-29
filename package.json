@@ -1,7 +1,7 @@
 {
   "name": "vue-color",
-  "version": "2.8.1",
-  "description": "Color of Vue Components",
+  "version": "1",
+  "description": "Color of Vue Components ",
   "keywords": [
     "color",
     "vuejs"

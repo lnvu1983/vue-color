@@ -7,6 +7,7 @@ import Photoshop from './components/Photoshop.vue'
 import Sketch from './components/Sketch.vue'
 import Chrome from './components/Chrome.vue'
 import Twitter from './components/Twitter.vue'
+import Mix from './components/Mix.vue'
 import Alpha from './components/common/Alpha.vue'
 import Checkboard from './components/common/Checkboard.vue'
 import EditableInput from './components/common/EditableInput.vue'
@@ -25,6 +26,7 @@ const VueColor = {
   Photoshop,
   Sketch,
   Chrome,
+  Mix,
   Alpha,
   Checkboard,
   EditableInput,

@@ -10,7 +10,9 @@
       @touchmove="handleChange"
       @touchstart="handleChange">
       <div class="vc-hue-pointer" :style="{top: pointerTop, left: pointerLeft}" role="presentation">
-        <div class="vc-hue-picker"></div>
+        <div class="vc-hue-picker">
+          <div class="vc-hue-picker-inner" />
+        </div>
       </div>
     </div>
   </div>
@@ -30,8 +32,12 @@ export default {
   data () {
     return {
       oldHue: 0,
-      pullDirection: ''
+      pullDirection: '',
+      isElementReady: false
     }
+  },
+  mounted () {
+    this.isElementReady = true
   },
   computed: {
     colors () {
@@ -49,20 +55,20 @@ export default {
       }
     },
     pointerTop () {
-      if (this.direction === 'vertical') {
-        if (this.colors.hsl.h === 0 && this.pullDirection === 'right') return 0
-        return -((this.colors.hsl.h * 100) / 360) + 100 + '%'
-      } else {
-        return 0
-      }
+      if (this.direction !== 'vertical') return 0
+
+      const pointerHeight = this.isElementReady ? document.querySelector('.vc-hue-pointer').offsetHeight : 0
+
+      if (this.colors.hsl.h === 0 && this.pullDirection === 'right') return `${-pointerHeight / 2}px`
+
+      const percent = (this.colors.hsl.h / 360) * 100
+
+      return `calc(${100 - percent}% - ${pointerHeight / 2}px)`
     },
     pointerLeft () {
-      if (this.direction === 'vertical') {
-        return 0
-      } else {
-        if (this.colors.hsl.h === 0 && this.pullDirection === 'right') return '100%'
-        return (this.colors.hsl.h * 100) / 360 + '%'
-      }
+      if (this.direction === 'vertical') return 0
+
+      return (this.colors.hsl.h * 100) / 360 + '%'
     }
   },
   methods: {
